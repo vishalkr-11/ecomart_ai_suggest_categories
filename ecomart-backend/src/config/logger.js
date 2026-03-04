@@ -8,11 +8,11 @@ const devFormat = combine(
   colorize(),
   timestamp({ format: 'YYYY-MM-DD HH:mm:ss' }),
   errors({ stack: true }),
-  printf(({ level, message, timestamp: ts, stack }) => {
-    return stack
+  printf(({ level, message, timestamp: ts, stack }) =>
+    stack
       ? `[${ts}] ${level}: ${message}\n${stack}`
-      : `[${ts}] ${level}: ${message}`;
-  })
+      : `[${ts}] ${level}: ${message}`
+  )
 );
 
 const prodFormat = combine(
@@ -21,17 +21,15 @@ const prodFormat = combine(
   format.json()
 );
 
+// ─── IMPORTANT: Console-only on Vercel ───────────────────────────────────────
+// Vercel's serverless filesystem is read-only — file transports will crash
+// the function on boot. All logs are captured by Vercel's log dashboard anyway.
 const logger = createLogger({
   level: process.env.LOG_LEVEL || 'info',
   format: process.env.NODE_ENV === 'production' ? prodFormat : devFormat,
   transports: [
     new transports.Console(),
-    ...(process.env.NODE_ENV === 'production'
-      ? [
-          new transports.File({ filename: 'logs/error.log', level: 'error' }),
-          new transports.File({ filename: 'logs/combined.log' }),
-        ]
-      : []),
+    // NO file transports — incompatible with serverless (Vercel, Lambda, etc.)
   ],
   exitOnError: false,
 });
