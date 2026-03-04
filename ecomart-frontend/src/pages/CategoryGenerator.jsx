@@ -29,10 +29,12 @@ export default function CategoryGenerator() {
     <div style={{ display:'grid', gridTemplateColumns:'1fr 1fr', gap:28, alignItems:'start' }}>
       {/* Left — Form */}
       <div className="section-gap">
-        <div className="alert alert-info">
+       <div className="alert alert-info">
           <Info size={15} style={{ flexShrink:0, marginTop:2 }} />
-          <span>AI will only assign categories from the predefined list. Any hallucinated category is caught by schema validation and triggers a retry automatically.</span>
-        </div>
+            <span>
+               <strong>Intelligent Classification:</strong> Fill in your product details below and the AI will instantly suggest the best category, SEO tags, and sustainability filters — all tailored to your product.
+            </span>
+       </div>
         <div className="card">
           <div className="card-header">
             <div className="card-title" style={{ display:'flex', alignItems:'center', gap:8 }}>

@@ -34,8 +34,7 @@ export default function ProposalGenerator() {
       <div className="alert alert-info">
         <Info size={15} style={{ flexShrink:0, marginTop:2 }} />
         <span>
-          <strong>Budget Guarantee:</strong> AI selects SKUs and quantities only. All prices are fetched directly from the database and the total is enforced to stay within your limit by the backend — never by the AI.
-        </span>
+<strong>Budget Guaranteed:</strong> Every proposal is verified against real product pricing — your total will always stay within the limit you set. No surprises.        </span>
       </div>
 
       <div style={{ display:'grid', gridTemplateColumns:'1fr 1.2fr', gap:28, alignItems:'start' }}>

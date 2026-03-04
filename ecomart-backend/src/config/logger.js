@@ -21,15 +21,12 @@ const prodFormat = combine(
   format.json()
 );
 
-// ─── IMPORTANT: Console-only on Vercel ───────────────────────────────────────
-// Vercel's serverless filesystem is read-only — file transports will crash
-// the function on boot. All logs are captured by Vercel's log dashboard anyway.
 const logger = createLogger({
   level: process.env.LOG_LEVEL || 'info',
   format: process.env.NODE_ENV === 'production' ? prodFormat : devFormat,
   transports: [
     new transports.Console(),
-    // NO file transports — incompatible with serverless (Vercel, Lambda, etc.)
+    // File transports removed — Vercel filesystem is read-only
   ],
   exitOnError: false,
 });
